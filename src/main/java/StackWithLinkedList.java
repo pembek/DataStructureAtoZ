@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class StackWithLinkedList implements Stack{
+public class StackWithLinkedList implements Stack_s {
     public class Node{
         String val;
         Node next;

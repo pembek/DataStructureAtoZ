@@ -1,7 +1,10 @@
-public class StackWithArray implements Stack{
+import java.util.Deque;
+
+public class StackWithArray implements Stack_s{
 
     String [] array;
     int head = 0;
+    Deque<String> deque;
 
     public StackWithArray(){
         array = new String[10];
@@ -51,6 +54,6 @@ public class StackWithArray implements Stack{
 
     @Override
     public int size() {
-        return head + 1;
+        return head;
     }
 }
