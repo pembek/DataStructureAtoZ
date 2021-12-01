@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -99,18 +100,66 @@ public class SortLibrary {
         assert isSortedPart(a, lo, hi);
     }
 
-    //1961 Sir Charles Anthony Richard Hoare
+    // 1961 Sir Charles Anthony Richard Hoare ,(turing award 1980)
     // be careful equal keys drive up the tcomplexity to quadratic time!
     // Soln: 3-way Dijkstra partitioning
     //TODO find the killer input for Java system sort! it sometimes crashes! ,
     // the reason is they didn't do shuffling
-    public void quickSort(Comparable[] arr){
-       // TODO
+    public static void quickSort(Comparable[] arr){
+        // we assume the array is shuffled
+        // choose arbitrarily the first element to start partitioning
+        quickSortRecursive(arr, 0 , arr.length-1);
     }
 
-    //A version of quick-sort, takes linear time on average! quadratic on worst case
-    public void kthlargest(Comparable[] arr){
-        // TODO
+    public static void quickSortRecursive(Comparable[] a, int lo, int hi){
+        if(lo >= hi) return;
+        int j = partition(a, lo, hi);
+        SortLibrary.printArray(Arrays.asList(a));
+        quickSortRecursive(a, lo, j-1);
+        assert isSortedPart(a, lo, j - 1);
+        quickSortRecursive(a, j+1, hi);
+        assert isSortedPart(a, j+1, hi);
+    }
+
+    public static int partition(Comparable[] a, int lo, int hi){
+        int i = lo;
+        int j = hi + 1;
+
+        while(true){
+            while(less(a[++i],a[lo]))
+                if(i == hi) break;
+
+            while(less(a[lo],a[--j]))
+                if(j == lo) break;
+
+            if(i >= j) break;
+            swap(a, i, j);
+        }
+        swap(a,lo,j);
+        return j;
+    }
+
+    public void heapSort(Comparable[] arr){
+        // TODO  bottom-up method , swap max with the end, sort down, repeat
+    }
+
+    // A version of quick-sort, takes linear time on average! quadratic on worst case
+    // 1961 Hoare
+    public static Comparable kthlargest(Comparable[] arr, int k){
+        // TODO shuffle the array
+        int lo = 0;
+        int hi = arr.length - 1;
+        while(lo < hi){
+            int j = partition(arr, lo, hi);
+            if(j < k){ // j is on the left
+                lo = j + 1;
+            }
+            else if(j > k){ // j is on the right
+                hi = j - 1;
+            }
+            else if(j == k) return arr[k];
+        }
+        return arr[k];
     }
 
     // Useful sorting abstractions

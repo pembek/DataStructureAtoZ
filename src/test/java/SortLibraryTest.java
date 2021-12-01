@@ -12,6 +12,7 @@ import java.util.Arrays;
 public class SortLibraryTest {
     //private static SortLibrary sortLibrary;
     private static String [] array = new String[10];
+    private static Double [] arrayD;
 
     @BeforeClass
     public static void instantiate(){
@@ -79,7 +80,7 @@ public class SortLibraryTest {
     }
 
     @Test
-    public void mergeSortTest(){
+    public void mergeSortTestStrings(){
         array = new String[]{"ogs", "abc", "fat", "cat",
                 "tot", "gut", "but", "ogs", "bob", "zat",
                 "kik", "sek"};
@@ -87,5 +88,47 @@ public class SortLibraryTest {
         SortLibrary.mergeSort(array);
         SortLibrary.printArray(new ArrayList<String>(Arrays.asList(array)));
         assertTrue(SortLibrary.isSorted(array));
+    }
+
+    @Test
+    public void mergeSortTestDouble(){
+        arrayD = new Double[]{1.0, 54.0, 555.0, 3.0,
+                5.0, 778.0, 122.0, 24.0, 455.0, 99.0,
+                88.0, 77.0,33.0};
+        SortLibrary.printArray(new ArrayList<>(Arrays.asList(arrayD)));
+        SortLibrary.mergeSort(arrayD);
+        SortLibrary.printArray(new ArrayList<>(Arrays.asList(arrayD)));
+        assertTrue(SortLibrary.isSorted(arrayD));
+    }
+
+    @Test
+    public void partitionTest(){
+        array = new String[]{"K", "R", "A", "T",
+                "E", "L", "E", "P", "U", "I","M","Q","C","X",
+                "O", "S"};
+        SortLibrary.printArray(Arrays.asList(array));
+        int partition = SortLibrary.partition(array,0,array.length-1);
+
+        assertEquals(5, partition);
+    }
+
+    @Test
+    public void quickSortTest(){
+        array = new String[]{"K", "R", "A", "T",
+                "E", "L", "E", "P", "U", "I","M","Q","C","X",
+                "O", "S"};
+        SortLibrary.printArray(Arrays.asList(array));
+        SortLibrary.quickSort(array);
+        SortLibrary.printArray(Arrays.asList(array));
+    }
+
+    @Test
+    public void kthLargestTest(){
+        array = new String[]{"K", "R", "A", "T",
+                "E", "L", "E", "P", "U", "I","M","Q","C","X",
+                "O", "S"};
+        SortLibrary.printArray(Arrays.asList(array));
+
+        assertEquals("A", SortLibrary.kthlargest(array, 15));
     }
 }

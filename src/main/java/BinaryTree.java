@@ -1,3 +1,10 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+
 public class BinaryTree {
 
     public class Node{
@@ -20,6 +27,10 @@ public class BinaryTree {
         root = null;
     }
 
+    public boolean isEmpty(){
+        return (root == null);
+    }
+
     public void clean(){
         root = null;
     }
@@ -39,6 +50,26 @@ public class BinaryTree {
         }
         else {
             return lookup(node.right, data);
+        }
+    }
+
+    public int ceil(int data){
+        return ceil(root, data);
+    }
+
+    public int ceil(Node node, int data){
+        if(node == null) return -1;
+
+        if(node.data == data) {
+            return node.data;
+        }else if (node.data < data){
+            return ceil(node.right, data);
+        }else{
+            if(node.left != null){
+                int temp = ceil(node.left, data);
+                if(temp >= data) return temp;
+                else return node.data;
+            }else return node.data;
         }
     }
 
@@ -127,9 +158,12 @@ public class BinaryTree {
      Uses a recursive helper to do the traversal.
      */
     public void printTree() {
+        System.out.print("Inorder:   ");
         printTree(root);
         System.out.println();
     }
+
+    /* Prints "inorder" */
     private void printTree(Node node) {
         if (node == null) return;
 
@@ -139,14 +173,30 @@ public class BinaryTree {
         printTree(node.right);
     }
 
+    public ArrayList<Node> getInorderArray(){
+        ArrayList<Node> a = new ArrayList<>(size());
+        getInorderArray(root, a);
+        return a;
+    }
+
+    public void getInorderArray(Node node, ArrayList<Node> a){
+        if(node == null) return;
+
+        getInorderArray(node.left, a);
+        a.add(new Node(node.data));
+        getInorderArray(node.right, a);
+    }
+
     /**
      Prints the node values in the "postorder" order.
      Uses a recursive helper to do the traversal.
      */
     public void printPostorder() {
+        System.out.print("Postorder: ");
         printPostorder(root);
         System.out.println();
     }
+
     public void printPostorder(Node node) {
         if (node == null) return;
 
@@ -156,6 +206,26 @@ public class BinaryTree {
 
         // then deal with the node
         System.out.print(node.data + "  ");
+    }
+
+    public void printLevelOrder() {
+        if (root == null) return;
+
+        //LinkedList<Node> q = new LinkedList<>();
+        DequeG<Node> q = new DequeG<>();
+
+        q.enqueue(root);
+
+        while(!q.isEmpty()){
+            Node curr = q.dequeue();
+
+            if (curr == null) continue;
+            // First print the node
+            System.out.print(curr.data + "  ");
+
+            q.enqueue(curr.left);
+            q.enqueue(curr.right);
+        }
     }
 
     /**
@@ -180,12 +250,35 @@ public class BinaryTree {
             return hasPathSum(node.right,sum - node.data) || hasPathSum(node.left, sum - node.data);
         }
     }
+
     /**
      Given a binary tree, prints out all of its root-to-leaf
      paths, one per line. Uses a recursive helper to do the work.
      */
-    public void printPaths() {
+    public List<ArrayList<Integer>> printPaths() {
+        int[] path = new int[10];
+        List<ArrayList<Integer>> cumulative = new ArrayList<>();
+        printPaths(root, path, 0, cumulative) ;
+        return cumulative;
+    }
 
+    public void printPaths(Node node, int[] path, int idx, List<ArrayList<Integer>> cumulative){
+        if(node == null) return;
+
+        if(node.right == null && node.left == null){
+            path[idx++] = node.data;
+            ArrayList<Integer> temp = new ArrayList<>();
+            for(int i = 0; i < idx; i++){
+                System.out.print(path[i] + " ");
+                temp.add(path[i]);
+            }
+            cumulative.add(temp);
+            System.out.println();
+            return;
+        }
+        path[idx++] = node.data;
+        printPaths(node.left, path, idx, cumulative);
+        printPaths(node.right, path, idx, cumulative);
     }
 
     /**
@@ -312,9 +405,9 @@ public class BinaryTree {
      binary search tree (BST). Uses the efficient
      recursive helper.
      */
-    public boolean isBST2() {
-        return isBST2(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    }
+    /*public boolean isBST2() {
+        return isBST2(root, min, max);
+    }*/
     /**
      Efficient BST helper -- Given a node, and min and max values,
      recurs down the tree to verify that it is a BST, and that all

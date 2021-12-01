@@ -23,8 +23,7 @@ public class BinaryTreeTest {
         binaryTree.clean();
     }
 
-    @Test
-    public void _01_hasPathSumBasicCaseShouldBeTrue() {
+    /*public void _01_hasPathSumBasicCaseShouldBeTrue() {
         binaryTree.insert(4);
         binaryTree.insert(3);
         binaryTree.insert(7);
@@ -35,20 +34,7 @@ public class BinaryTreeTest {
         assertEquals(true, binaryTree.hasPathSum(11));
         assertEquals(true, binaryTree.hasPathSum(8));
         assertEquals(true, binaryTree.hasPathSum(10));
-    }
-
-    @Test
-    public void _02_hasPathSumBasicCaseShouldBeFalse() {
-        binaryTree.insert(4);
-        binaryTree.insert(3);
-        binaryTree.insert(7);
-        binaryTree.insert(1);
-        binaryTree.insert(2);
-        binaryTree.insert(0);
-
-        assertFalse(binaryTree.hasPathSum(7));
-        assertFalse(binaryTree.hasPathSum(19));
-    }
+    }*/
 
     @Test
     public void _03_sameTreeEmptyTrees() {
@@ -169,5 +155,22 @@ public class BinaryTreeTest {
         binaryTree.insert(0);
         assertEquals(6,binaryTree.size());
         assertEquals(4,binaryTree.maxDepth());
+    }
+
+    @Test
+    public void _14_printTreeTest(){
+        binaryTree.insert(8);
+        binaryTree.insert(3);
+        binaryTree.insert(10);
+        binaryTree.insert(1);
+        binaryTree.insert(6);
+        binaryTree.insert(14);
+        binaryTree.insert(4);
+        binaryTree.insert(7);
+        binaryTree.insert(13);
+
+        binaryTree.printTree();
+        binaryTree.printPostorder();
+        binaryTree.printLevelOrder();
     }
 }
