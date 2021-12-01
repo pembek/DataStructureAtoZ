@@ -13,54 +13,7 @@ public class WordBoard {
         boolean [][] visited = new boolean[m][n];
         boolean found = false;
 
-        for(String s: words){        ArrayList<String> resL = new ArrayList<>();
-            int m = board.length, n = board[0].length; // m rows , n cols
-
-            boolean [][] visited = new boolean[m][n];
-            boolean found = false;
-
-            for(String s: words){
-                for(int i = 0; i < m; i++) {
-                    for (int j = 0; j < n; j++) {
-                        found = false;
-                        if(findWordV2(board, i, j, s.toCharArray(), 0, visited)){
-                            resL.add(s);
-                            clear(visited);
-                            found = true;
-                            break;
-                        }
-                    }
-                    if(found) break;
-                }
-            }
-            return resL;
-        }
-
-        private static boolean findWordV2(char [][] board, int i, int j, char[] word, int idx, boolean [][] visited) {
-            if(i < 0 || j < 0 || i >= board.length || j >= board[0].length ||
-                    board[i][j] != word[idx] || visited[i][j] || idx >= word.length)
-                return false;
-
-            if(word.length == idx + 1){
-                if(board[i][j] == word[idx]){
-                    visited[i][j] = true;
-                    return true;
-                }
-                else return false;
-            }
-
-            visited[i][j] = true;
-
-            if(findWordV2(board, i - 1, j, word, idx+1, visited) ||
-                    findWordV2(board, i, j + 1, word, idx+1, visited) ||
-                    findWordV2(board, i + 1, j, word, idx+1, visited) ||
-                    findWordV2(board, i, j -1, word, idx+1, visited)){
-                return true;
-            }else{
-                visited[i][j] = false;
-                return false;
-            }
-        }
+        for(String s: words){
             for(int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     found = false;
