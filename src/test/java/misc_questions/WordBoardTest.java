@@ -1,3 +1,6 @@
+package misc_questions;
+
+import misc_questions.WordBoard;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

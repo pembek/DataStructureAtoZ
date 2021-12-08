@@ -1,4 +1,6 @@
+package ds;
 
+import ds.BinaryTree;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.BeforeClass;

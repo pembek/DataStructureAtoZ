@@ -1,3 +1,5 @@
+package ds;
+
 // Maximum oriented priority queue
 public class PriorityQueueMin<T extends Comparable> {
 

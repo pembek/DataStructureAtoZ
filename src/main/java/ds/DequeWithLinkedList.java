@@ -1,29 +1,34 @@
-public class DequeG<T>{
+package ds;
+
+public class DequeWithLinkedList implements Deque_d{
     public class Node{
-        T val;
+        String val;
         Node next;
     }
     Node first;
     Node last;
 
+    @Override
     public boolean isEmpty() {
         return (first == null);
     }
 
-    public T dequeue() {
+    @Override
+    public String dequeue() {
         if(isEmpty())
             return null;
-        T val = first.val;
+        String s = first.val;
         first = first.next;
         if(isEmpty()) last = null;
-        return val;
+        return s;
     }
 
-    public void enqueue(T val) {
+    @Override
+    public void enqueue(String s) {
         Node oldLast = last;
 
         last = new Node();
-        last.val = val;
+        last.val = s;
         last.next = null;
 
         if(isEmpty()){

@@ -1,3 +1,5 @@
+package ds;
+
 import java.util.Deque;
 
 public class StackWithArray implements Stack_s{

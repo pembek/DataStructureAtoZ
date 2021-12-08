@@ -1,29 +1,11 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class SortQuestions{
-    public static void main(String args []){
-
-        /** [5,3,2,4]
-         [1,5,0,10,14]
-         [6,6,0,1,1,4,6]
-         [1,5,6,14,15]
-         */
-        //int [] nums = new int[]{1,5,0,10,14,1,5,45431};
-        //minDifference2(nums);
-
-
-
-    }
-
 
     public static int[] twoSum(int[] nums, int target) {
         ArrayList<Integer> arrayList = new ArrayList<>();
