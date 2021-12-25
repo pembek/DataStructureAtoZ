@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -118,8 +119,11 @@ public class SortQuestions{
     public static int minDifference3(int[] nums){
         if (nums.length < 5) return 0;
         if (nums.length <= 8) return getDiff(nums, true);
-        PriorityQueue<Integer> top4 = new PriorityQueue<>();
-        PriorityQueue<Integer> bot4 = new PriorityQueue<>((a, b) -> b - a); // min priority queue
+        PriorityQueue<Integer> top4 = new PriorityQueue<>(); // default is min
+        PriorityQueue<Integer> bot4 = new PriorityQueue<>((a, b) -> b - a); // max priority queue
+        PriorityQueue<Integer[]> botdene = new PriorityQueue<>
+                ((o1, o2) -> (o2[1] - o2[0])-(o1[1] - o1[0])); // min priority queue
+
 
         for (int n : nums) {
             top4.offer(n);
