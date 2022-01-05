@@ -54,9 +54,33 @@ Given a three-word puzzle like the one above, create an algorithm that finds a s
     down dead-end paths. For example, if we assign the characters starting from the ones place
     and moving to the left, at each stage, we can verify the correctness of what we have so far
     before we continue onwards. */
+    /*
+    Start by examining the rightmost digit of the topmost row, with a carry of 0
+    If we are beyond the leftmost digit of the puzzle, return true if no carry, false otherwise
+
+    If we are currently trying to assign a char in one of the addends
+        If char already assigned, just recur on row beneath this one, adding value into sum
+        If not assigned, then for (every possible choice among the digits not in use)
+            make that choice and then on row beneath this one,
+            if successful, return true
+            if !successful, unmake assignment and try another digit
+            return false if no assignment worked to trigger backtracking
+    Else if trying to assign a char in the sum
+        If char assigned & matches correct,
+            recur on next column to the left with carry,
+                if success return true
+        If char assigned & doesn't match,
+            return false
+        If char unassigned & correct digit already used,
+            return false
+        If char unassigned & correct digit unused,
+            assign it and recur on next column to left with carry,
+                if success
+                    return true
+    return false to trigger backtracking*/
     public Map<Character, Integer> findSolutionWithSmartChecks(String op1, String op2, String res){
         Map<Character, Integer> hm = new HashMap<>();
-        
+
         return hm;
     }
 
@@ -81,6 +105,7 @@ Given a three-word puzzle like the one above, create an algorithm that finds a s
                 }
             }
         }
+        String s = Integer.toBinaryString(333);
         return false; // nothing worked
     }
 
